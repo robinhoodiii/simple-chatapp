@@ -1,0 +1,135 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f2f2f2;
+}
+
+.container {
+  max-width: 400px;
+  margin: 40px auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.header {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+.chat-container {
+  display: flex;
+  flex: 1;
+}
+
+.sidebar {
+  flex: 0 0 200px;
+  padding: 10px;
+  background-color: #f2f2f2;
+  border-right: 1px solid #ccc;
+}
+
+.chat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-container {
+  padding: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.chat-container ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.chat-container li {
+  margin-bottom: 10px;
+}
+
+.chat-container .message {
+  padding: 8px;
+  background-color: #f2f2f2;
+  border-radius: 4px;
+}
+
+.chat-container .message .username {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.chat-container .message .message-content {
+  font-size: 14px;
+}
+
+.input-container {
+  padding: 10px;
+  display: flex;
+}
+
+.input-container input {
+  flex-grow: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.input-container button {
+  margin-left: 10px;
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#loginContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#loginContainer input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  width: 200px;
+}
+
+#loginContainer button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+
+.userListContainer {
+  margin-bottom: 10px;
+}
+
+.statusIcon {
+  font-size: 10px;
+  margin-left: 5px;
+}
+
+.userListContainer li .statusIcon {
+  color: green;
+}

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Marites</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+      <div class="header">
+        <h2>Marites Chat App</h2>
+      </div>
+      
+      <div id="loginContainer">
+        <h2>Username</h2>
+        <input id="usernameInput" placeholder="Enter your username" autocomplete="off" />
+        <button id="loginButton">Login</button>
+      </div>
+  
+      <div id="chatContainer" style="display: none;">
+        <div class="sidebar">
+          <h3>Online Users</h3>
+          <div class="userListContainer">
+            <ul id="userList"></ul>
+          </div>
+        </div>
+        <div class="chat">
+          <div class="chat-container">
+            <ul id="messages"></ul>
+          </div>
+          <div class="input-container">
+            <input id="messageInput" autocomplete="off" placeholder="Type your message">
+            <button id="sendButton">Send</button>
+          </div>
+        </div>
+      </div>
+  
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const socket = io();
+      const loginContainer = document.getElementById('loginContainer');
+      const chatContainer = document.getElementById('chatContainer');
+  
+      // Handle user login
+      document.getElementById('loginButton').addEventListener('click', () => {
+        const usernameInput = document.getElementById('usernameInput');
+        const username = usernameInput.value.trim();
+  
+        if (username !== '') {
+          socket.emit('login', username);
+          loginContainer.style.display = 'none';
+          chatContainer.style.display = 'block';
+          usernameInput.value = '';
+        }
+      });
+  
+      // Handle chat message submission
+      document.getElementById('sendButton').addEventListener('click', () => {
+        const messageInput = document.getElementById('messageInput');
+        const message = messageInput.value.trim();
+        if (message !== '') {
+          socket.emit('chat message', message);
+          messageInput.value = '';
+        }
+      });
+  
+      // Handle incoming chat messages
+      socket.on('chat message', ({ username, message }) => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <div class="message">
+            <div class="username">${username}</div>
+            <div class="message-content">${message}</div>
+          </div>
+        `;
+        document.getElementById('messages').appendChild(li);
+        scrollToBottom();
+      });
+
+// Handle user joining
+socket.on('user joined', (username) => {
+  const li = document.createElement('li');
+  li.textContent = username;
+  li.style.color = 'green';
+  document.getElementById('userList').appendChild(li);
+  scrollToBottom();
+});
+
+// Handle user leaving
+socket.on('user left', (username) => {
+  const userList = document.getElementById('userList');
+  const userItem = Array.from(userList.children).find(item => item.textContent === username);
+  if (userItem) {
+    userList.removeChild(userItem);
+  }
+  scrollToBottom();
+});
+      // Scroll to the bottom of the chat container
+      function scrollToBottom() {
+        const messagesList = document.getElementById('messages');
+        messagesList.scrollTop = messagesList.scrollHeight;
+      }
+    </script>
+  </body>
+</html>
+
+   
