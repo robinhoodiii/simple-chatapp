@@ -30,8 +30,3 @@ node server.js
 3. Enter a username in the login form and click the "Login" button.
 
 4. Start chatting Marites! Type your message in the input field click the "Send" button.
-
-## Customization
-
-- To change the port number, modify the `port` variable in the `server.js` file.
-- To customize the HTML/CSS design, update the code in the `public/index.html` file.
